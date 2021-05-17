@@ -6,17 +6,17 @@ require('./database/mongoose');
 const UserRouter=require('./router/userRoutes');
 const LinkRouter=require('./router/LinkRoutes');
 const errorHandler=require('./errorHandling/errorHandler');
-const cors=require('cors');
+// const cors=require('cors');
 
-const port=process.env.PORT || 3000;
+const port=process.env.PORT || 4000;
 const app=express();
 
 app.use(express.static(path.join(__dirname, 'clientside/build')));
 
-app.use(cors({
-    origin:process.env.ORIGIN_SITE,
-    credentials:true
-}));
+// app.use(cors({
+//     origin:process.env.ORIGIN_SITE,
+//     credentials:true
+// }));
 
 app.use(cookieParser());
 app.use(express.json());
