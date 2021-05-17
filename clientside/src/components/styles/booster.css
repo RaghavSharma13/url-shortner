@@ -1,0 +1,18 @@
+.booster{
+    background-color:var(--Dark-Violet);
+    background-image:url(../../images/bg-boost-mobile.svg);
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:100% 50%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:100px 0px 90px;
+}
+.booster h2{
+    color:white;
+}
+.booster .btn--GS{
+    margin:15px 0px 0px 0px;
+}

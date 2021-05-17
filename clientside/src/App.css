@@ -1,0 +1,9 @@
+.logo{
+    cursor:pointer;
+}
+@media only screen and (min-width:600px){
+    .navbar,.header,.main,.footer{
+        padding-left:8vw !important;
+        padding-right:8vw !important;
+    }
+}

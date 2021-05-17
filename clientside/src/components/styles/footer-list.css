@@ -1,0 +1,28 @@
+.footer--list{
+    width:100%;
+    margin:50px 0px;
+}
+.footer--list h5{
+    color:white;
+    margin-bottom:20px;
+}
+.footer-list ul{
+    width:100%;
+}
+.footer--list li{
+    width:100%;
+    margin:10px 0px;
+    text-align:center;
+    color:var(--Grayish-Violet);
+    font-size:0.8rem;
+    cursor:pointer;
+    transition:color 250ms ease;
+}
+.footer--list li:hover{
+    color:var(--Cyan);
+}
+@media only screen and (min-width:800px){
+    .footer--list{
+        margin:0;
+    }
+}

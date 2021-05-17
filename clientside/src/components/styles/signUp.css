@@ -1,0 +1,100 @@
+.userForm{
+    align-items:center;
+    background-color:var(--Cyan);
+    display:flex;
+    height:100%;
+    justify-content:center;
+    width:100%;
+    
+}
+.form{
+    background-color:white;
+    border-radius:20px;
+    box-shadow:0px 0px 7px 2px var(--Grayish-Violet);
+    margin:15px;
+    min-width:min(88%,500px);
+    padding:20px;
+}
+.form>p{
+    font-size:13px;
+    text-align:center;
+}
+.form>p>a{
+    color:var(--Cyan);
+}
+form>h2{
+    text-align:start;
+    margin-bottom:10px;
+}
+.loginError{
+    color:lightcoral;
+    margin:0px 0px 10px;
+}
+.success{
+    color:lightgreen;
+    font-size:1.125rem;
+    margin:0px 0px 10px;
+}
+form>p{
+    font-size:14px;
+    margin:0px 0px 10px;
+}
+form{
+    display:flex;
+    flex-direction:column;
+    padding:20px;
+}
+.email--label,.password--label{
+    color:var(--Grayish-Violet);
+    display:flex;
+    flex-direction:column;
+    font-size:0.8em;
+    font-weight:200;
+    margin-bottom:15px;
+    position:relative;
+}
+.email--label::after,.password--label::after{
+    color:lightcoral;
+    font-size:0.8em;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+.email--label::after{
+    content:var(--psuedoEmailMsg);
+}
+.password--label::after{
+    content:var(--psuedoPasswordMsg);
+}
+.email--input,.password--input{
+    border:none;
+    border-radius:10px;
+    box-shadow:0px 0px 5px 3px var(--Gray);
+    color:var(--Very-Dark-Violet);
+    font:500 var(--font-family); 
+    height:40px;
+    margin:7px 0px 24px;
+    outline:none;
+    padding:3px 10px;
+    width:100%;
+}
+.invalid{
+    box-shadow:0px 0px 0px 2px lightcoral;
+}
+
+.btn--ls{
+    background-color:var(--Cyan);
+    border:none;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+    font:15px var(--font-family);
+    height:35px;
+    margin:10px 0px 0px;
+    outline:none;
+    transition: background-color 300ms ease;
+    width:100%;
+}
+.btn--ls:hover{
+    background-color:var(--Cyan-hover);
+}

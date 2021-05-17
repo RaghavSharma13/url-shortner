@@ -1,0 +1,31 @@
+.historyPage{
+    background-color:var(--Gray);
+    width:100%;
+    height:100%;
+}
+.history--list{
+    padding:20px;
+}
+.history--list>h1,.history--msg> h2,.history--list>h2{
+    font-size:3rem;
+    font-family:'Parisienne',cursive;
+}
+.history--list>h2{
+    margin-top:20vh;
+}
+.history--msg{
+    align-items:center;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    width:100%;
+    justify-content:center;
+}
+.history--msg>a{
+    font-size:1.5rem;
+    color:var(--Dark-Violet);
+    transition:color 300ms ease;
+}
+.history--msg>a:hover{
+    color:var(--Very-Dark-Blue);
+}
