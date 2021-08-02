@@ -11,8 +11,6 @@ const errorHandler=require('./errorHandling/errorHandler');
 const port=process.env.PORT || 4000;
 const app=express();
 
-app.use(express.static(path.join(__dirname, 'clientside/build')));
-
 // app.use(cors({
 //     origin:process.env.ORIGIN_SITE,
 //     credentials:true
@@ -20,14 +18,12 @@ app.use(express.static(path.join(__dirname, 'clientside/build')));
 
 app.use(cookieParser());
 app.use(express.json());
-
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'clientside/build/index.html'),err=>{
-      if(err) res.status(500).send(err);
-    });
-})
 app.use(UserRouter);
 app.use(LinkRouter);
+app.use(express.static(path.join(__dirname, './clientside/build')));
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'./clientside/build/index.html'));
+})
 app.use(errorHandler)
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}.`)

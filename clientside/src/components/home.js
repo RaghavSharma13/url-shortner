@@ -4,10 +4,10 @@ import Header from './header';
 import Main from './main';
 import Booster from './booster';
 import Footer from './footer';
-const Home = () => {
+const Home = ({logged, setLogged}) => {
     return (
         <>
-        <Navbar/>
+        <Navbar logged={logged} setLogged={setLogged}/>
         <Header/>
         <Main/>
         <Booster/>

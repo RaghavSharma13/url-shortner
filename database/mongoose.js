@@ -4,4 +4,4 @@ mongoose.connect(process.env.MONGODB_URL,{
     useCreateIndex:true,
     useFindAndModify:false,
     useUnifiedTopology:true
-})
+}).catch(error=>console.log(error))

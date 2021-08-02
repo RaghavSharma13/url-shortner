@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const signUp=async(email,password,setEmail,setPassword,setEmailError,setPasswordError,setSignUpSuccess,setHistory)=>{
+const signUp=async(setAuth, email,password,setEmail,setPassword,setEmailError,setPasswordError,setHistory)=>{
     try {
         setEmailError("");
         setPasswordError("");
         await axios.post(
-          `${process.env.REACT_APP_BACKEND_URL}/users/signUp`,
+          `/users/signUp`,
           {
             email,
             password,
@@ -14,7 +14,7 @@ const signUp=async(email,password,setEmail,setPassword,setEmailError,setPassword
         );
         setEmail("");
         setPassword("");
-        setSignUpSuccess(true);
+        setAuth(true);
         setHistory();
       } catch (err) {
         const error = err.response.data;
@@ -29,10 +29,10 @@ const signUp=async(email,password,setEmail,setPassword,setEmailError,setPassword
       }
 }
 
-const logIn=async(email,password,setEmail,setPassword,setLoginSuccess,setHistory)=>{
+const logIn=async(setAuth, email,password,setEmail,setPassword,setLoginSuccess,setHistory)=>{
     try {
         await axios.post(
-          `${process.env.REACT_APP_BACKEND_URL}/user/login`,
+          `/user/login`,
           {
             email:email,
             password:password,
@@ -44,61 +44,64 @@ const logIn=async(email,password,setEmail,setPassword,setLoginSuccess,setHistory
         setEmail("");
         setPassword("");
         setLoginSuccess(1);
-        setHistory()
+        setAuth(true);
+        setHistory();
       } catch (error) {
         setLoginSuccess(0);
       }
 }
-const signOut=(token)=>{
-  axios.delete(`${process.env.REACT_APP_BACKEND_URL}/user/signOut`,{
-    headers:{
-      Authorization:'Bearer '+token
-    }
-  })
+const logout=()=>{
+  try{
+    axios.delete(`/user/logout`)
+  }catch(error){
+    
+  }
 }
-const setLink=(LinkDescription,token)=>{
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/setLink`,{
+const signOut=()=>{
+  try{
+    axios.delete(`/user/signOut`)
+  }catch(error){
+    
+  }
+}
+const setLink=(LinkDescription)=>{
+    try{
+      axios.post(`/setLink`,{
         fullLink:LinkDescription.fullLink,
         shortLink:LinkDescription.shortLink
-    },{
-        headers:{
-            Authorization:'Bearer '+token
-        }
-    })
+    })}catch(error){
+      console.log("Failed to save Link.")
+    }
 }
 
-const getLinks=async(setLinks,setCopyStatus,token)=>{
+const getLinks=async(setLinks,setCopyStatus)=>{
     try {
         let res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/getLinks`,
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
+          `/getLinks`,
         );
         setLinks(res.data);
         setCopyStatus(new Array(res.data.length).fill(false));
       } catch (error) {
-        console.log(error);
+        setLinks(null)
       }
 }
 
-const deleteLink=async(id,token)=>{
-    await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/deleteLink`,{
+const deleteLink=async(id)=>{
+    try{
+      await axios.delete(
+        `/deleteLink`,{
             data:{
                 _id:id,
-            },
-            headers:{
-              Authorization:'Bearer '+token
             }
         }
-    )
+    )}catch(error){
+      console.log("Failed to Delete Link.")
+    }
 }
 export{
     signUp,
     logIn,
+    logout,
     signOut,
     setLink,
     getLinks,

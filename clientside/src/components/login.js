@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {logIn} from '../utils/routes'
 
-const Login = () => {
+const Login = ({setAuth}) => {
   const history = useHistory()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,11 +12,6 @@ const Login = () => {
       <div className="form">
         <form>
           <h2>Log In.</h2>
-          {loginSuccess === 1 && (
-            <p className="success">
-              LogIn successfull!! You can now close this tab.
-            </p>
-          )}
           {loginSuccess === 0 && <p className="loginError">Invalid Login!!</p>}
           <label className="email--label">
             Email
@@ -42,7 +37,7 @@ const Login = () => {
               type="submit"
               onClick={async(e) => {
                 e.preventDefault();
-                await logIn(email,password,setEmail,setPassword,setLoginSuccess,()=>history.goBack());
+                await logIn(setAuth, email, password, setEmail, setPassword, setLoginSuccess, ()=>history.goBack());
               }}
             >
               Log In

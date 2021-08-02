@@ -3,7 +3,7 @@ const User=require('../models/userModel');
 
 const auth= async(req,res,next)=>{
     try{
-        const refreshToken=req.header('Authorization').replace('Bearer ','');
+        const refreshToken=req.cookies.jwt
         const decodedRefresh=jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET);
         const user=await User.findById(decodedRefresh.data);
         if(!user) throw new Error();

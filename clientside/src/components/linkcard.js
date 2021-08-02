@@ -11,7 +11,7 @@ const LinkCard = ({
 }) => {
   return (
     <div className="linkCard">
-      {newLinks ? (
+      {newLinks ?(
         <div className="linkCard--content">
           <div className="original">
             <DeleteForeverIcon

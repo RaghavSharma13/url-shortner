@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import LinkCard from "./linkcard";
 import {getLinks,deleteLink} from '../utils/routes';
@@ -8,10 +7,9 @@ import "./styles/history.css";
 const History = () => {
   const [links, setLinks] = useState([]);
   const [copyStatus, setCopyStatus] = useState([]);
-  
   const handleDelete=async(id)=>{
-      deleteLink(id,Cookies.get('jwt'));
-      getLinks(setLinks,setCopyStatus,Cookies.get('jwt'));
+      deleteLink(id);
+      getLinks(setLinks,setCopyStatus);
   }
   
   const handleCopyStatus = (index) => {
@@ -26,13 +24,13 @@ const History = () => {
     setCopyStatus(copyList);
   };
   
-  useEffect(() => getLinks(setLinks,setCopyStatus,Cookies.get('jwt')), []);
-  
+  useEffect(() => getLinks(setLinks,setCopyStatus), []);
+
   return (
     <div className="historyPage">
-      {Cookies.get("jwt") ? (
+      {links ? (
         <div className="history--list">
-          <h1>All your Links.</h1>
+          <h1>Your Links.</h1>
           {links.length === 0 ? (
             <h2>WOW You don't have any shortened Links!!!</h2>
           ) : (

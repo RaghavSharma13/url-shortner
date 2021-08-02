@@ -4,6 +4,7 @@ const Link=require('../models/LinksModel');
 const auth=require('../middleware/auth');
 const router=new express.Router();
 router.post('/users/signUp',async(req,res,next)=>{ 
+
     try{
         const newUser=new User(req.body);
         const refreshToken=await newUser.generateRefreshToken();
@@ -17,6 +18,7 @@ router.post('/users/signUp',async(req,res,next)=>{
         res.status(201).send();
     }
     catch(error){
+        console.log(error)
         next(error);
     };
 })
@@ -29,6 +31,7 @@ router.post('/user/login',async(req,res)=>{
             expires:new Date(Date.now()+1000*60*60*24),
             sameSite:'Lax',
             httpOnly:true,
+            path:"/",
             secure:process.env.ENV==='production'?true:false
         });
         res.status(200).send();
@@ -36,10 +39,15 @@ router.post('/user/login',async(req,res)=>{
         res.status(500).send('Invalid Login.');
     }
 })
+router.delete('/user/logout', auth, async(req,res)=>{
+    res.clearCookie("jwt");
+    res.status(200).send();
+})
 router.delete('/user/signOut',auth,async(req,res)=>{
     try{
         await Link.deleteMany({owner:req.user._id});
         await User.findByIdAndRemove(req.user._id);
+        res.clearCookie("jwt");
         res.status(204).send();
     }catch(error){
         console.log(error);

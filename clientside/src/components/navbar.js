@@ -1,14 +1,12 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.svg";
-import Cookies from "js-cookie";
-import {signOut} from '../utils/routes'
+import {logout, signOut} from '../utils/routes'
 import "./styles/navbar.css";
 
-const Navbar = () => {
+const Navbar = ({logged, setLogged}) => {
   const history = useHistory();
-  const [token,setToken]=useState(Cookies.get('jwt'));
   const body = document.body;
   const [overlay, setOverlay] = useState([false, false]);
   // overlay [open,close]
@@ -35,19 +33,18 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar--login">
-          {token ? (
-            <h5 onClick={() => {Cookies.remove("jwt");setToken('')}}>Logout</h5>
+          {logged ? (
+            <h5 onClick={async() => {await logout();setLogged(false)}}>Logout</h5>
           ) : (
             <Link className="login_link" to="/users/login">
               <h5>Login</h5>
             </Link>
           )}
-          {token?
+          {logged?
             (
               <button className="signUp_signOut" onClick={async()=>{
-                await signOut(Cookies.get('jwt'));
-                Cookies.remove('jwt');
-                setToken('');
+                await signOut();
+                setLogged(false);
               }}>Sign Out</button>
             ):
             (
@@ -78,19 +75,18 @@ const Navbar = () => {
             <li>Resources</li>
           </ul>
           <div className="line"></div>
-          {token ? (
-            <h5 onClick={()=>{Cookies.remove("jwt");setToken('')}}>Logout</h5>
+          {logged ? (
+            <h5 onClick={async()=>{await logout();setLogged(false)}}>Logout</h5>
           ) : (
             <Link className="login_link" to="/users/login" target="_blank">
               <h5>Login</h5>
             </Link>
           )}
-          {token?
+          {logged?
             (
               <button onClick={async()=>{
-                await signOut(Cookies.get('refToken'));
-                Cookies.remove('refToken');
-                setToken('');
+                await signOut();
+                setLogged(false);
               }}>Sign Out</button>
             ):
             (

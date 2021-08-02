@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Shortner from "./shortner";
 import Statistics from "./statistics";
 import getShortLink from "../utils/shortenApi";
-import Cookies from "js-cookie";
 import LinkCard from "./linkcard";
 import { setLink } from "../utils/routes";
 import "./styles/main.css";
@@ -25,7 +24,8 @@ const Main = () => {
     }
     setLink_output(obj);
     setlink_input("");
-    if (Cookies.get("jwt")) setLink(obj, Cookies.get("jwt"));
+    // console.log(Cookies.get("jwt"))
+    setLink(obj);
   };
   return (
     <div className="main">
@@ -42,7 +42,9 @@ const Main = () => {
           newLinks={link_output}
           copyStatus={copyStatus}
           handleCopyStatus={() => setCopyStatus(!copyStatus)}
-          deleteLink={() => setLink_output()}
+          deleteLink={() =>{
+            setDisplayCard(false); setLink_output()
+          }}
         />
       )}
       <Statistics />
